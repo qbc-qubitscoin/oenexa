@@ -1,0 +1,1 @@
+package org.oenexa.securitysvc.entity; import jakarta.persistence.*; import lombok.*; @Entity @Table(name="investigations") @Data @Builder @NoArgsConstructor @AllArgsConstructor public class InvestigationEntity { @Id private String id; private String entityId; private String entityType; private String status; }

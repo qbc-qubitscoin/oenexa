@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  flyway:
+    enabled: false
+
+oenexa:
+  jwt:
+    secret: 923d838b93992b8d0300a6e031e42c23576311a3d90f23b7b590e8c1874989e2

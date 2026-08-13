@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: oenexa-dev
+  labels:
+    app.kubernetes.io/part-of: oenexa
+    environment: dev
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: oenexa-staging
+  labels:
+    app.kubernetes.io/part-of: oenexa
+    environment: staging
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: oenexa-prod
+  labels:
+    app.kubernetes.io/part-of: oenexa
+    environment: production

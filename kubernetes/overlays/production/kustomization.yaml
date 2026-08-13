@@ -1,0 +1,19 @@
+# ═══════════════════════════════════════════════════
+# OENEXA™ — Production Overlay
+# ═══════════════════════════════════════════════════
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: oenexa-prod
+
+resources:
+  - ../../base/namespace.yaml
+  - ../../base/configmap.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3
+    target:
+      kind: Deployment

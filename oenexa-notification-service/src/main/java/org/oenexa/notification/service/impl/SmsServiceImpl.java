@@ -1,0 +1,1 @@
+package org.oenexa.notification.service.impl; import org.oenexa.notification.service.SmsService; import org.springframework.stereotype.Service; @Service public class SmsServiceImpl implements SmsService {}

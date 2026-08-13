@@ -1,0 +1,7 @@
+server:
+  port: 8095
+spring:
+  application:
+    name: oenexa-analytics-service
+  elasticsearch:
+    uris: http://localhost:9200

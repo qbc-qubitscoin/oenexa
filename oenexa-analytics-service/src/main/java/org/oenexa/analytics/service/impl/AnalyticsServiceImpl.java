@@ -1,0 +1,1 @@
+package org.oenexa.analytics.service.impl; import org.oenexa.analytics.service.AnalyticsService; import org.springframework.stereotype.Service; @Service public class AnalyticsServiceImpl implements AnalyticsService { public void platformMetrics() {} public void userEngagement() {} public void tradingVolume() {} public void revenue() {} }

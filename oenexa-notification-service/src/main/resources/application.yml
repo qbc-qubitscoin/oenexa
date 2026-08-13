@@ -1,0 +1,14 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: oenexa-notification-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/notification_db?createDatabaseIfNotExist=true
+    username: root
+    password: password
+  kafka:
+    bootstrap-servers: localhost:9092
+  mail:
+    host: localhost
+    port: 25

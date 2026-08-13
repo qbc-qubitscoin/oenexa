@@ -1,0 +1,1 @@
+package org.oenexa.notification.repository; import org.springframework.data.jpa.repository.JpaRepository; import org.oenexa.notification.entity.SmsLogEntity; public interface SmsLogRepository extends JpaRepository<SmsLogEntity, String> {}

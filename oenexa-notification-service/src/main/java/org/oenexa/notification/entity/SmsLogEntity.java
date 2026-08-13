@@ -1,0 +1,1 @@
+package org.oenexa.notification.entity; import jakarta.persistence.*; import lombok.*; @Entity @Table(name="sms_logs") @Data @Builder @NoArgsConstructor @AllArgsConstructor public class SmsLogEntity { @Id private String id; private String notificationId; private String phoneNumber; private String status; }

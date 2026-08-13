@@ -1,0 +1,1 @@
+package org.oenexa.risk.model; import lombok.*; @Data @Builder @NoArgsConstructor @AllArgsConstructor public class RiskAssessment { private java.math.BigDecimal score; private String factors; private String recommendation; }

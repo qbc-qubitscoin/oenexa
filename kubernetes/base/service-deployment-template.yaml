@@ -1,0 +1,99 @@
+# ═══════════════════════════════════════════════════
+# OENEXA™ Service Deployment Template
+# Replace ${SERVICE_NAME}, ${SERVICE_PORT}, ${DB_NAME}
+# ═══════════════════════════════════════════════════
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${SERVICE_NAME}
+  namespace: oenexa-dev
+  labels:
+    app: ${SERVICE_NAME}
+    app.kubernetes.io/part-of: oenexa
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ${SERVICE_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${SERVICE_NAME}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "${SERVICE_PORT}"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      containers:
+        - name: ${SERVICE_NAME}
+          image: oenexa/${SERVICE_NAME}:latest
+          ports:
+            - containerPort: ${SERVICE_PORT}
+          envFrom:
+            - configMapRef:
+                name: oenexa-common-config
+            - secretRef:
+                name: oenexa-secrets
+          env:
+            - name: SERVER_PORT
+              value: "${SERVICE_PORT}"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://oenexa-mysql:3306/${DB_NAME}"
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: ${SERVICE_PORT}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: ${SERVICE_PORT}
+            initialDelaySeconds: 60
+            periodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${SERVICE_NAME}
+  namespace: oenexa-dev
+spec:
+  selector:
+    app: ${SERVICE_NAME}
+  ports:
+    - port: ${SERVICE_PORT}
+      targetPort: ${SERVICE_PORT}
+  type: ClusterIP
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ${SERVICE_NAME}-hpa
+  namespace: oenexa-dev
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ${SERVICE_NAME}
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80

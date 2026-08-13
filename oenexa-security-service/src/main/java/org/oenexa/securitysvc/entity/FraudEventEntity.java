@@ -1,0 +1,1 @@
+package org.oenexa.securitysvc.entity; import jakarta.persistence.*; import lombok.*; @Entity @Table(name="fraud_events") @Data @Builder @NoArgsConstructor @AllArgsConstructor public class FraudEventEntity { @Id private String id; private String userId; private String transactionId; private java.math.BigDecimal fraudScore; private String status; }

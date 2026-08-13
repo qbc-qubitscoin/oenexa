@@ -1,0 +1,1 @@
+package org.oenexa.risk.service.impl; import org.oenexa.risk.service.RiskScoringService; import org.springframework.stereotype.Service; @Service public class RiskScoringServiceImpl implements RiskScoringService { public void calculateLoginRisk() {} public void calculateTransactionRisk() {} public void calculateWithdrawalRisk() {} }

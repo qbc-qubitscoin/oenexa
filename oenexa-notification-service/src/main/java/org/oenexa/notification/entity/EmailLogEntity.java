@@ -1,0 +1,1 @@
+package org.oenexa.notification.entity; import jakarta.persistence.*; import lombok.*; @Entity @Table(name="email_logs") @Data @Builder @NoArgsConstructor @AllArgsConstructor public class EmailLogEntity { @Id private String id; private String notificationId; private String recipientEmail; private String subject; private String status; }

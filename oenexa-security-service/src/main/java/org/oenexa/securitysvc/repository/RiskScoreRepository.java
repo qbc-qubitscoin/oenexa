@@ -1,0 +1,1 @@
+package org.oenexa.securitysvc.repository; import org.springframework.data.jpa.repository.JpaRepository; import org.oenexa.securitysvc.entity.RiskScoreEntity; public interface RiskScoreRepository extends JpaRepository<RiskScoreEntity, String> {}

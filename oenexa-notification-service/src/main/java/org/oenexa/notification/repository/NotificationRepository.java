@@ -1,0 +1,1 @@
+package org.oenexa.notification.repository; import org.springframework.data.jpa.repository.JpaRepository; import org.oenexa.notification.entity.NotificationEntity; public interface NotificationRepository extends JpaRepository<NotificationEntity, String> {}

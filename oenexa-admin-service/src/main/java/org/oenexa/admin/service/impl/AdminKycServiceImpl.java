@@ -1,0 +1,1 @@
+package org.oenexa.admin.service.impl; import org.oenexa.admin.service.AdminKycService; import org.springframework.stereotype.Service; @Service public class AdminKycServiceImpl implements AdminKycService {}

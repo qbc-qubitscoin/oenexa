@@ -1,0 +1,19 @@
+# ═══════════════════════════════════════════════════
+# OENEXA™ — Staging Overlay
+# ═══════════════════════════════════════════════════
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: oenexa-staging
+
+resources:
+  - ../../base/namespace.yaml
+  - ../../base/configmap.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2
+    target:
+      kind: Deployment

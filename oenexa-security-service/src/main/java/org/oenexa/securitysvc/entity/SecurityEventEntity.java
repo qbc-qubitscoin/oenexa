@@ -1,0 +1,1 @@
+package org.oenexa.securitysvc.entity; import jakarta.persistence.*; import lombok.*; @Entity @Table(name="security_events") @Data @Builder @NoArgsConstructor @AllArgsConstructor public class SecurityEventEntity { @Id private String id; private String userId; private String eventType; private String ipAddress; private String deviceId; }

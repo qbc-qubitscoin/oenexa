@@ -1,0 +1,10 @@
+server:
+  port: 8092
+spring:
+  application:
+    name: oenexa-market-data-service
+  kafka:
+    bootstrap-servers: localhost:9092
+  redis:
+    host: localhost
+    port: 6379

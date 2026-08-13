@@ -1,0 +1,1 @@
+package org.oenexa.securitysvc.entity; import jakarta.persistence.*; import lombok.*; @Entity @Table(name="risk_scores") @Data @Builder @NoArgsConstructor @AllArgsConstructor public class RiskScoreEntity { @Id private String id; private String userId; private java.math.BigDecimal score; }

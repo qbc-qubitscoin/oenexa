@@ -1,0 +1,1 @@
+package org.oenexa.audit.repository; import org.springframework.data.jpa.repository.JpaRepository; import org.oenexa.audit.entity.AuditLogEntity; public interface AuditLogRepository extends JpaRepository<AuditLogEntity, String> {}

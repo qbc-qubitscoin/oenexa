@@ -1,0 +1,1 @@
+package org.oenexa.notification.entity; import jakarta.persistence.*; import lombok.*; @Entity @Table(name="notifications") @Data @Builder @NoArgsConstructor @AllArgsConstructor public class NotificationEntity { @Id private String id; private String userId; private String type; private String content; private String status; }

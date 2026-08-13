@@ -1,0 +1,1 @@
+package org.oenexa.audit.entity; import jakarta.persistence.*; import lombok.*; @Entity @Table(name="activity_logs") @Data @Builder @NoArgsConstructor @AllArgsConstructor public class ActivityLogEntity { @Id private String id; private String userId; private String activityType; private String ipAddress; private String userAgent; }

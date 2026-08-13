@@ -1,0 +1,77 @@
+# ═══════════════════════════════════════════════════
+# OENEXA™ — Git Ignore
+# ═══════════════════════════════════════════════════
+
+# ── Gradle ──
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ── IDE ──
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
+out/
+bin/
+
+# ── Java ──
+*.class
+*.jar
+*.war
+*.ear
+*.log
+hs_err_pid*
+replay_pid*
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ── Docker ──
+docker-compose.override.yml
+
+# ── Environment ──
+.env
+.env.local
+.env.*.local
+*.env
+
+# ── Secrets ──
+*.pem
+*.key
+*.p12
+*.jks
+!**/src/test/**/*.pem
+!**/src/test/**/*.key
+
+# ── Coverage ──
+jacoco/
+*.exec
+
+# ── Terraform ──
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/*.tfvars
+
+# ── Python scripts (generated during setup) ──
+setup_*.py
+
+# ── Node ──
+node_modules/
+dist/
+
+# ── Go ──
+*.exe
+
