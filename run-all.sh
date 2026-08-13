@@ -25,10 +25,10 @@ cd ..
 
 echo "Starting React UI..."
 # shellcheck disable=SC2164
-cd oenexa-ui
+cd ../oenexa-ui
 npm run dev &
 UI_PID=$!
-cd ..
+cd ../oenexa
 
 echo "All services started! Press Ctrl+C to stop."
 
