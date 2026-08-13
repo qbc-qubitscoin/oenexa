@@ -1,0 +1,13 @@
+# Build Stage
+FROM golang:1.22-alpine AS builder
+WORKDIR /app
+COPY oenexa-matching-engine/go.mod oenexa-matching-engine/go.sum ./
+RUN go mod download
+COPY oenexa-matching-engine/ .
+RUN CGO_ENABLED=0 GOOS=linux go build -o matching-engine .
+
+# Run Stage
+FROM alpine:latest
+WORKDIR /app
+COPY --from=builder /app/matching-engine .
+CMD ["./matching-engine"]
