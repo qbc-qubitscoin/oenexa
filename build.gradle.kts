@@ -6,6 +6,7 @@ plugins {
     java
     alias(libs.plugins.spring.boot) apply false
     alias(libs.plugins.spring.dependency.management) apply false
+    id("org.sonarqube") version "6.0.1.5171"
 }
 
 group = "com.oenexa"
@@ -15,6 +16,7 @@ description = "OENEXA™ — Open Economy Next Generation Exchange & Assets"
 // ── Common configuration for ALL subprojects ──
 subprojects {
     plugins.apply("java")
+    plugins.apply("jacoco")
     plugins.apply("io.spring.dependency-management")
 
     group = rootProject.group
@@ -22,7 +24,7 @@ subprojects {
 
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(21)
+            languageVersion = JavaLanguageVersion.of(25)
         }
     }
 
@@ -50,7 +52,15 @@ subprojects {
         annotationProcessor(rootProject.libs.mapstruct.processor)
 
         // Testing
+        // Testing - TDD Framework (JUnit 5) and Native Testing (H2)
         testImplementation(rootProject.libs.spring.boot.starter.test)
+        testImplementation("com.h2database:h2")
+        
+        // Testing - BDD Framework (Cucumber)
+        testImplementation("io.cucumber:cucumber-java:7.21.1")
+        testImplementation("io.cucumber:cucumber-spring:7.21.1")
+        testImplementation("io.cucumber:cucumber-junit-platform-engine:7.21.1")
+        testImplementation("org.junit.platform:junit-platform-suite")
         testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     }
 
@@ -61,5 +71,57 @@ subprojects {
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
         options.compilerArgs.addAll(listOf("-parameters"))
+    }
+
+    tasks.withType<JacocoReport> {
+        dependsOn(tasks.withType<Test>())
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+        }
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.map {
+                fileTree(it) {
+                    exclude(
+                        "**/*Application*",
+                        "**/dto/**",
+                        "**/entity/**",
+                        "**/config/**",
+                        "**/security/SecurityConfig*",
+                        "**/security/JwtAuthenticationFilter*",
+                        "**/kafka/**"
+                    )
+                }
+            }))
+        }
+    }
+
+    tasks.withType<JacocoCoverageVerification> {
+        violationRules {
+            rule {
+                limit {
+                    minimum = 1.00.toBigDecimal()
+                }
+            }
+        }
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.map {
+                fileTree(it) {
+                    exclude(
+                        "**/*Application*",
+                        "**/dto/**",
+                        "**/entity/**",
+                        "**/config/**",
+                        "**/security/SecurityConfig*",
+                        "**/security/JwtAuthenticationFilter*",
+                        "**/kafka/**"
+                    )
+                }
+            }))
+        }
+    }
+
+    tasks.withType<Test> {
+        finalizedBy("jacocoTestReport", "jacocoTestCoverageVerification")
     }
 }

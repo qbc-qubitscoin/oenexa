@@ -39,7 +39,7 @@ func (p *EventProducer) PublishOrderCreated(orderID string, userID int64, asset 
 	if err != nil {
 		return fmt.Errorf("failed to marshal event: %w", err)
 	}
-	
+
 	// Convert bytes to string as Java side expects String payloads directly
 	payloadStr := string(payloadBytes)
 
